@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Anime List</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+	<style>
+		@font-face {
+			font-family: 'Brutal Type';
+			src: url('../fonts/Brutal\ Type\ W05\ Light.ttf') format('truetype'), /* Safari, Android, iOS */
+		}
+		body{
+			font-family: 'Brutal Type';
+		}
+		.add-anime {
+			position: relative;
+		}
+	</style>
+</head>
+<body>
+<div class="list" style="margin-left: 10px;"><h1>List Of Anime</h1></div>
+<div class="mb-3 add-anime" style="width: 50%;margin-left: 10px;">
+	<h3>Add Anime:</h3>
+  <label for="Name" class="form-label">Anime Name</label>
+  <input type="email" class="form-control" id="Name" placeholder="Some Anime">
+  <label for="Link" class="form-label">Link</label>
+  <input type="email" class="form-control" id="Link" placeholder="https://animelon.com/">
+  <button type="submit" class="btn btn-outline-secondary" onclick="add()" style="margin-top: 10px;">Add</button>
+</div>
+<h3>Remove Anime from list</h3><br>
+<div class="input-group mb-3" style="width: 50%;margin-left: 10px;">
+	<select class="form-select" aria-label="Select Anime" id="Del_Anime">
+  <option selected disabled>Click To Delete An Anime</option>
+</select>
+  <button class="btn btn-outline-secondary" type="button"  onclick="del()" id="button-addon2">Delete</button>
+</div>
+<script src="../librarys/Dummy.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
