@@ -4,4 +4,21 @@
 
 @layer components {
 	/* TAIL-WIND Class CSS here */
+	.ListItem {
+		@apply py-1;
+	}
+	.ListItem a,
+	.ListItem label {
+		@apply p-3;
+	}
+	.ListItem a {
+		@apply text-blue-500 underline;
+	}
+	.finished {
+		@apply line-through italic text-gray-600;
+	}
+
+	.AnimeList {
+		@apply ml-4;
+	}
 }
