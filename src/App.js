@@ -1,6 +1,7 @@
 import { Fragment, Component } from "react";
 import { AiFillDelete, AiOutlineEdit } from "react-icons/ai";
-import SendNotification from "./notify";
+import SendNotification, { IsURL } from "./notify";
+import { Toaster } from "react-hot-toast";
 
 class App extends Component {
 	state = {
@@ -12,6 +13,7 @@ class App extends Component {
 			<Fragment>
 				<this.AnimeList />
 				<this.AddAnime />
+				<Toaster position="top-right" />
 			</Fragment>
 		);
 	}
@@ -100,8 +102,9 @@ class App extends Component {
 			this.SetAnimeData(anime_data);
 			this.setState({ editing: null });
 			SendNotification("Deleted " + anime);
+		} else {
+			SendNotification("Cancelled deletion of " + anime);
 		}
-		SendNotification("Cancelled deletion of " + anime);
 	};
 
 	EditAnime = (anime) => {
@@ -126,21 +129,20 @@ class App extends Component {
 			delete anime_data[anime];
 			anime_data[e.target.value] = data;
 			this.SetAnimeData(anime_data);
-			SendNotification("Renamed " + anime + " to " + e.target.value);
+			SendNotification(`Renamed "${anime}" to "${e.target.value}"`);
 		}
 	};
 
 	ChangeLink = (anime) => (e) => {
 		if (e.key === "Enter") {
 			let anime_data = this.state.anime_data;
-			const URLregx = /^(ftp|http|https):\/\/[^ "]+$/;
-			if (URLregx.test(e.target.value)) {
+			if (IsURL(e.target.value)) {
 				anime_data[anime].link = e.target.value;
 				this.SetAnimeData(anime_data);
-				SendNotification("Changed link of " + anime + " to " + e.target.value);
+				SendNotification("Updated link of " + anime);
 			} else {
 				e.target.value = anime_data[anime].link;
-				SendNotification("Invalid URL");
+				SendNotification("Invalid URL", "error");
 			}
 		}
 	};
@@ -171,17 +173,20 @@ class App extends Component {
 		let anime_data = this.state.anime_data;
 		let anime_name = document.getElementById("AnimeName").value;
 		let anime_link = document.getElementById("AnimeLink").value;
-		if (anime_name && anime_link) {
-			if (anime_data[anime_name]) {
-				anime_data[anime_name].link = anime_link;
-				SendNotification("Updated " + anime_name + " link to " + anime_link);
-			} else {
-				anime_data[anime_name] = { link: anime_link, finished: false };
-				SendNotification("Added " + anime_name + " to list!");
-			}
+		if (anime_name && !anime_link) {
+			anime_data[anime_name] = { link: "", finished: false };
 			this.SetAnimeData(anime_data);
+			SendNotification("Added " + anime_name + "!");
+		} else if (anime_name && anime_link) {
+			if (IsURL(anime_link)) {
+				anime_data[anime_name] = { link: anime_link, finished: false };
+				this.SetAnimeData(anime_data);
+				SendNotification("Added " + anime_name + " with link!");
+			} else {
+				SendNotification("Invalid URL", "error");
+			}
 		} else {
-			SendNotification("Invalid Input");
+			SendNotification("Invalid Input", "error");
 		}
 	};
 

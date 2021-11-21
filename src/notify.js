@@ -12,16 +12,7 @@ const SendNotification = (message, type = "info") => {
 };
 
 const IsURL = (str) => {
-	var pattern = new RegExp(
-		"^(https?:\\/\\/)?" + // protocol
-			"(?:\\/\\/)" + // host may be surrounded by slashes
-			"([\\da-z\\.-]+)\\." + // domain name
-			"([a-z\\.]{2,6})\\/" + // TLD
-			"([\\w\\/\\.\\-\\?\\,]*)?" + // path
-			"([\\w\\?\\=\\&\\-\\+\\%\\$]*)?" + // query string
-			"(#[\\w\\-]*)?$",
-		"i"
-	);
+	var pattern = /^(ftp|http|https):\/\/[^ "]+$/;
 	return pattern.test(str);
 };
 
