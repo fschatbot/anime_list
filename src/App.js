@@ -1,13 +1,16 @@
 import { Fragment, Component } from "react";
+import { AiFillDelete, AiOutlineEdit } from "react-icons/ai";
+import SendNotification from "./notify";
 
 class App extends Component {
 	state = {
 		anime_data: JSON.parse(localStorage.getItem("AnimeList")) || {},
+		editing: null,
 	};
 	render() {
 		return (
 			<Fragment>
-				<h1 className="text-blue-600 text-xl"> Anime List </h1>
+				<h1 className="text-4xl">List Of Anime</h1>
 				<this.AnimeList />
 			</Fragment>
 		);
@@ -15,6 +18,14 @@ class App extends Component {
 
 	AnimeList = () => {
 		let anime_data = this.state.anime_data;
+		// Sort Data
+		anime_data = Object.keys(anime_data)
+			.sort()
+			.reduce((obj, key) => {
+				obj[key] = anime_data[key];
+				return obj;
+			}, {});
+
 		if (!anime_data) {
 			return (
 				<ul>
@@ -25,9 +36,27 @@ class App extends Component {
 		return (
 			<ul className="AnimeList">
 				{Object.keys(anime_data).map((anime) => (
-					<li key={anime} className={"ListItem " + (anime_data[anime].finished ? "finished" : "")}>
+					<li
+						key={anime}
+						className={"ListItem group " + (anime_data[anime].finished ? "finished" : "")}>
 						<input type="checkbox" defaultChecked={anime_data[anime].finished}></input>
 						<this.Labeling anime={anime} link={anime_data[anime].link} />
+						<button
+							className={this.IsEditting(anime) + " group-hover:scale-100 Edit"}
+							onClick={() => this.EditAnime(anime)}>
+							<AiOutlineEdit />
+						</button>
+						<div className={"EditContainer " + this.IsEditting(anime)}>
+							<input
+								type="input"
+								placeholder="Enter Anime Link..."
+								defaultValue={anime_data[anime].link}
+								className="Link"></input>
+							<input type="input" placeholder="Enter New Name..."></input>
+							<button className="Delete" onClick={() => this.DelAnime(anime)}>
+								<AiFillDelete />
+							</button>
+						</div>
 					</li>
 				))}
 			</ul>
@@ -35,7 +64,6 @@ class App extends Component {
 	};
 
 	Labeling = ({ anime, link }) => {
-		console.log(anime, link);
 		if (link) {
 			return (
 				<a href={link} target="_blank" rel="noopener noreferrer">
@@ -47,11 +75,44 @@ class App extends Component {
 		}
 	};
 
-	update_anime_data = (Data) => {
+	SetAnimeData = (data) => {
+		data = Object.keys(data)
+			.sort()
+			.reduce((obj, key) => {
+				obj[key] = data[key];
+				return obj;
+			}, {});
 		this.setState({
-			anime_data: Data,
+			anime_data: data,
 		});
-		localStorage.setItem("AnimeList", JSON.stringify(Data));
+		localStorage.setItem("AnimeList", JSON.stringify(data));
+	};
+
+	DelAnime = (anime) => {
+		const UserInput = window.confirm("Are you sure you want to delete " + anime + "?");
+		if (UserInput) {
+			let anime_data = this.state.anime_data;
+			delete anime_data[anime];
+			this.SetAnimeData(anime_data);
+			SendNotification("Deleted " + anime);
+		}
+		SendNotification("Cancelled deletion of " + anime);
+	};
+
+	EditAnime = (anime) => {
+		if (this.state.editing === anime) {
+			this.setState({ editing: null });
+		} else {
+			this.setState({ editing: anime });
+		}
+	};
+
+	IsEditting = (anime) => {
+		console.log(this.state.editing);
+		if (this.state.editing === anime) {
+			return "scale-100";
+		}
+		return "scale-0";
 	};
 }
 
