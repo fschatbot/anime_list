@@ -132,9 +132,15 @@ class App extends Component {
 	ChangeLink = (anime) => (e) => {
 		if (e.key === "Enter") {
 			let anime_data = this.state.anime_data;
-			anime_data[anime].link = e.target.value;
-			this.SetAnimeData(anime_data);
-			SendNotification("Changed link of " + anime + " to " + e.target.value);
+			const URLregx = /^(ftp|http|https):\/\/[^ "]+$/;
+			if (URLregx.test(e.target.value)) {
+				anime_data[anime].link = e.target.value;
+				this.SetAnimeData(anime_data);
+				SendNotification("Changed link of " + anime + " to " + e.target.value);
+			} else {
+				e.target.value = anime_data[anime].link;
+				SendNotification("Invalid URL");
+			}
 		}
 	};
 }
