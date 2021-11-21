@@ -26,19 +26,23 @@ class App extends Component {
 				return obj;
 			}, {});
 
-		if (!anime_data) {
+		if (JSON.stringify(anime_data) === JSON.stringify({})) {
 			return (
 				<div className="container">
-					<h1 className="text-4xl">List Of Anime</h1>
+					<h1 className="text-4xl">List Of Anime (0)</h1>
 					<ul>
-						<li key="nolist">There are no animes</li>
+						<li key="nolist" className="ListItem">
+							<label>No Current Anime (Add Some Below)</label>
+						</li>
 					</ul>
 				</div>
 			);
 		}
 		return (
 			<div className="container">
-				<h1 className="text-4xl">List Of Anime</h1>
+				<h1 className="text-4xl">
+					List Of Anime <sub>({Object.keys(anime_data).length})</sub>
+				</h1>
 				<ul className="AnimeList">
 					{Object.keys(anime_data).map((anime) => (
 						<li
