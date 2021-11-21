@@ -51,8 +51,12 @@ class App extends Component {
 								type="input"
 								placeholder="Enter Anime Link..."
 								defaultValue={anime_data[anime].link}
-								className="Link"></input>
-							<input type="input" placeholder="Enter New Name..."></input>
+								className="Link"
+								onKeyUp={this.ChangeLink(anime)}></input>
+							<input
+								type="input"
+								placeholder="Enter New Name..."
+								onKeyUp={this.ChangeName(anime)}></input>
 							<button className="Delete" onClick={() => this.DelAnime(anime)}>
 								<AiFillDelete />
 							</button>
@@ -108,11 +112,30 @@ class App extends Component {
 	};
 
 	IsEditting = (anime) => {
-		console.log(this.state.editing);
 		if (this.state.editing === anime) {
 			return "scale-100";
 		}
 		return "scale-0";
+	};
+
+	ChangeName = (anime) => (e) => {
+		if (e.key === "Enter") {
+			let anime_data = this.state.anime_data;
+			let data = anime_data[anime];
+			delete anime_data[anime];
+			anime_data[e.target.value] = data;
+			this.SetAnimeData(anime_data);
+			SendNotification("Renamed " + anime + " to " + e.target.value);
+		}
+	};
+
+	ChangeLink = (anime) => (e) => {
+		if (e.key === "Enter") {
+			let anime_data = this.state.anime_data;
+			anime_data[anime].link = e.target.value;
+			this.SetAnimeData(anime_data);
+			SendNotification("Changed link of " + anime + " to " + e.target.value);
+		}
 	};
 }
 
