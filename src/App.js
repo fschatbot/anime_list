@@ -44,7 +44,10 @@ class App extends Component {
 						<li
 							key={anime}
 							className={"ListItem group " + (anime_data[anime].finished ? "finished" : "")}>
-							<input type="checkbox" defaultChecked={anime_data[anime].finished}></input>
+							<input
+								type="checkbox"
+								defaultChecked={anime_data[anime].finished}
+								onChange={this.toggleAnime(anime)}></input>
 							<this.Labeling anime={anime} link={anime_data[anime].link} />
 							<button
 								className={this.IsEditting(anime) + " group-hover:scale-100 Edit"}
@@ -136,6 +139,13 @@ class App extends Component {
 				SendNotification("Invalid URL");
 			}
 		}
+	};
+
+	toggleAnime = (anime) => (e) => {
+		let anime_data = this.state.anime_data;
+		anime_data[anime].finished = e.target.checked;
+		this.SetAnimeData(anime_data);
+		SendNotification(anime + " is now " + (e.target.checked ? "finished" : "unfinished"));
 	};
 
 	AddAnime = () => {
