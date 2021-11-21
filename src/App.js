@@ -10,8 +10,8 @@ class App extends Component {
 	render() {
 		return (
 			<Fragment>
-				<h1 className="text-4xl">List Of Anime</h1>
 				<this.AnimeList />
+				<this.AddAnime />
 			</Fragment>
 		);
 	}
@@ -34,36 +34,48 @@ class App extends Component {
 			);
 		}
 		return (
-			<ul className="AnimeList">
-				{Object.keys(anime_data).map((anime) => (
-					<li
-						key={anime}
-						className={"ListItem group " + (anime_data[anime].finished ? "finished" : "")}>
-						<input type="checkbox" defaultChecked={anime_data[anime].finished}></input>
-						<this.Labeling anime={anime} link={anime_data[anime].link} />
-						<button
-							className={this.IsEditting(anime) + " group-hover:scale-100 Edit"}
-							onClick={() => this.EditAnime(anime)}>
-							<AiOutlineEdit />
-						</button>
-						<div className={"EditContainer " + this.IsEditting(anime)}>
-							<input
-								type="input"
-								placeholder="Enter Anime Link..."
-								defaultValue={anime_data[anime].link}
-								className="Link"
-								onKeyUp={this.ChangeLink(anime)}></input>
-							<input
-								type="input"
-								placeholder="Enter New Name..."
-								onKeyUp={this.ChangeName(anime)}></input>
-							<button className="Delete" onClick={() => this.DelAnime(anime)}>
-								<AiFillDelete />
+			<Fragment>
+				<h1 className="text-4xl">List Of Anime</h1>
+				<ul className="AnimeList">
+					{Object.keys(anime_data).map((anime) => (
+						<li
+							key={anime}
+							className={"ListItem group " + (anime_data[anime].finished ? "finished" : "")}>
+							<input type="checkbox" defaultChecked={anime_data[anime].finished}></input>
+							<this.Labeling anime={anime} link={anime_data[anime].link} />
+							<button
+								className={this.IsEditting(anime) + " group-hover:scale-100 Edit"}
+								onClick={() => this.EditAnime(anime)}>
+								<AiOutlineEdit />
 							</button>
-						</div>
-					</li>
-				))}
-			</ul>
+							<div className={"EditContainer " + this.IsEditting(anime)}>
+								<input
+									type="input"
+									placeholder="Enter Anime Link..."
+									defaultValue={anime_data[anime].link}
+									className="Link"
+									onKeyUp={this.ChangeLink(anime)}></input>
+								<input
+									type="input"
+									placeholder="Enter New Name..."
+									onKeyUp={this.ChangeName(anime)}></input>
+								<button className="Delete" onClick={() => this.DelAnime(anime)}>
+									<AiFillDelete />
+								</button>
+							</div>
+						</li>
+					))}
+				</ul>
+			</Fragment>
+		);
+	};
+
+	AddAnime = () => {
+		return (
+			<Fragment>
+				<h1 className="text-4xl">Add Anime</h1>
+				<p>Work in Progress!! 🚧</p>
+			</Fragment>
 		);
 	};
 
