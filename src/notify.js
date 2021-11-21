@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 
+https://react-hot-toast.com/
 const SendNotification = (message, type = "info") => {
 	console.log(`${type}: ${message}`);
 	toast[type === "info" ? "success" : "error"](message, {
