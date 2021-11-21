@@ -91,6 +91,7 @@ class App extends Component {
 			let anime_data = this.state.anime_data;
 			delete anime_data[anime];
 			this.SetAnimeData(anime_data);
+			this.setState({ editing: null });
 			SendNotification("Deleted " + anime);
 		}
 		SendNotification("Cancelled deletion of " + anime);
@@ -139,11 +140,35 @@ class App extends Component {
 
 	AddAnime = () => {
 		return (
-			<div className="container">
+			<div className="container AddAnimes">
 				<h1 className="text-4xl">Add Anime</h1>
-				<p>Work in Progress!! 🚧</p>
+				<label htmlFor="AnimeName">Anime Name:</label>
+				<input type="input" placeholder="Enter Anime Name..." id="AnimeName"></input>
+				<label htmlFor="AnimeLink">Anime Link:</label>
+				<input type="input" placeholder="Enter Anime Link..." id="AnimeLink"></input>
+				<button className="Add" onClick={this.AddAnimeSubmit}>
+					Add
+				</button>
 			</div>
 		);
+	};
+
+	AddAnimeSubmit = () => {
+		let anime_data = this.state.anime_data;
+		let anime_name = document.getElementById("AnimeName").value;
+		let anime_link = document.getElementById("AnimeLink").value;
+		if (anime_name && anime_link) {
+			if (anime_data[anime_name]) {
+				anime_data[anime_name].link = anime_link;
+				SendNotification("Updated " + anime_name + " link to " + anime_link);
+			} else {
+				anime_data[anime_name] = { link: anime_link, finished: false };
+				SendNotification("Added " + anime_name + " to list!");
+			}
+			this.SetAnimeData(anime_data);
+		} else {
+			SendNotification("Invalid Input");
+		}
 	};
 
 	SetAnimeData = (data) => {
