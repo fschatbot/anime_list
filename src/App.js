@@ -28,13 +28,16 @@ class App extends Component {
 
 		if (!anime_data) {
 			return (
-				<ul>
-					<li key="nolist">There are no animes</li>
-				</ul>
+				<div className="container">
+					<h1 className="text-4xl">List Of Anime</h1>
+					<ul>
+						<li key="nolist">There are no animes</li>
+					</ul>
+				</div>
 			);
 		}
 		return (
-			<Fragment>
+			<div className="container">
 				<h1 className="text-4xl">List Of Anime</h1>
 				<ul className="AnimeList">
 					{Object.keys(anime_data).map((anime) => (
@@ -66,16 +69,7 @@ class App extends Component {
 						</li>
 					))}
 				</ul>
-			</Fragment>
-		);
-	};
-
-	AddAnime = () => {
-		return (
-			<Fragment>
-				<h1 className="text-4xl">Add Anime</h1>
-				<p>Work in Progress!! 🚧</p>
-			</Fragment>
+			</div>
 		);
 	};
 
@@ -89,19 +83,6 @@ class App extends Component {
 		} else {
 			return <label>{anime}</label>;
 		}
-	};
-
-	SetAnimeData = (data) => {
-		data = Object.keys(data)
-			.sort()
-			.reduce((obj, key) => {
-				obj[key] = data[key];
-				return obj;
-			}, {});
-		this.setState({
-			anime_data: data,
-		});
-		localStorage.setItem("AnimeList", JSON.stringify(data));
 	};
 
 	DelAnime = (anime) => {
@@ -154,6 +135,28 @@ class App extends Component {
 				SendNotification("Invalid URL");
 			}
 		}
+	};
+
+	AddAnime = () => {
+		return (
+			<div className="container">
+				<h1 className="text-4xl">Add Anime</h1>
+				<p>Work in Progress!! 🚧</p>
+			</div>
+		);
+	};
+
+	SetAnimeData = (data) => {
+		data = Object.keys(data)
+			.sort()
+			.reduce((obj, key) => {
+				obj[key] = data[key];
+				return obj;
+			}, {});
+		this.setState({
+			anime_data: data,
+		});
+		localStorage.setItem("AnimeList", JSON.stringify(data));
 	};
 }
 
