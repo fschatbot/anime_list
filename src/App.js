@@ -1,5 +1,6 @@
 import { Fragment, Component } from "react";
 import { AiFillDelete, AiOutlineEdit } from "react-icons/ai";
+import { VscSearch } from "react-icons/vsc";
 import SendNotification, { IsURL } from "./notify";
 import { Toaster } from "react-hot-toast";
 
@@ -45,6 +46,12 @@ class App extends Component {
 				<h1 className="text-4xl">
 					List Of Anime <sub>({Object.keys(anime_data).length})</sub>
 				</h1>
+				<div className="SearchContainer">
+					<input placeholder="Search..." className="Search group" />
+					<button className="SearchSubmit">
+						<VscSearch size="20" />
+					</button>
+				</div>
 				<ul className="AnimeList">
 					{Object.keys(anime_data).map((anime) => (
 						<li

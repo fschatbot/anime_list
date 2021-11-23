@@ -85,4 +85,20 @@
 	body {
 		@apply m-2 p-0 overflow-x-hidden;
 	}
+	.SearchContainer {
+		@apply flex flex-row justify-center;
+	}
+	.Search {
+		@apply rounded-l-3xl p-2 px-4 border w-11/12 my-3 border-r-0
+		focus:outline-none focus:rounded-l-2xl
+		transition duration-200 ease-linear;
+	}
+	.SearchSubmit {
+		@apply rounded-r-3xl p-2 px-4 border my-3 border-l-0
+		transition duration-200 ease-linear;
+	}
+
+	.Search:focus + .SearchSubmit {
+		@apply outline-none rounded-r-2xl;
+	}
 }
