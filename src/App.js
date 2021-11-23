@@ -121,8 +121,8 @@ class App extends Component {
 		} else if (anime.toLowerCase().includes(searchTerm.toLowerCase())) {
 			return "";
 		} else if (
-			searchTerm.replace(/[a-z ]/, "") === searchTerm &&
-			anime.replace(/[a-z ]/g, "").includes(searchTerm.replace(/[a-z ]/g, ""))
+			searchTerm.replace(/[^A-Z]/, "") === searchTerm &&
+			anime.replace(/[^A-Z]/g, "").includes(searchTerm.replace(/[^A-Z]/g, ""))
 		) {
 			// Remove all lowercase letters and then compare
 			return "";
