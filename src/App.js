@@ -33,7 +33,9 @@ class App extends Component {
 		if (JSON.stringify(anime_data) === JSON.stringify({})) {
 			return (
 				<div className="container">
-					<h1 className="text-4xl">List Of Anime (0)</h1>
+					<h1 className="text-4xl">
+						List Of Anime <sub>(0)</sub>
+					</h1>
 					<ul>
 						<li key="nolist" className="ListItem">
 							<label>No Current Anime (Add Some Below)</label>
