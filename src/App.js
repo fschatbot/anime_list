@@ -8,6 +8,7 @@ class App extends Component {
 	state = {
 		anime_data: JSON.parse(localStorage.getItem("AnimeList")) || {},
 		editing: null,
+		search: "",
 	};
 	render() {
 		return (
@@ -47,16 +48,28 @@ class App extends Component {
 					List Of Anime <sub>({Object.keys(anime_data).length})</sub>
 				</h1>
 				<div className="SearchContainer">
-					<input placeholder="Search..." className="Search group" />
-					<button className="SearchSubmit">
+					<input
+						placeholder="Search..."
+						className="Search group"
+						id="SearchBar"
+						onKeyUp={(e) => this.setState({ search: e.target.value })}
+					/>
+					<button
+						className="SearchSubmit"
+						onClick={(e) => this.setState({ search: document.getElementById("SearchBar").value })}>
 						<VscSearch size="20" />
 					</button>
 				</div>
 				<ul className="AnimeList">
-					{Object.keys(anime_data).map((anime) => (
+					{Object.keys(anime_data).map((anime, index) => (
 						<li
 							key={anime}
-							className={"ListItem group " + (anime_data[anime].finished ? "finished" : "")}>
+							style={{ transitionDelay: `${index * 25}ms` }}
+							className={
+								"ListItem group " +
+								(anime_data[anime].finished ? "finished " : "") +
+								this.IsSearched(anime)
+							}>
 							<input
 								type="checkbox"
 								defaultChecked={anime_data[anime].finished}
@@ -98,6 +111,23 @@ class App extends Component {
 			);
 		} else {
 			return <label>{anime}</label>;
+		}
+	};
+
+	IsSearched = (anime) => {
+		let searchTerm = this.state.search;
+		if (searchTerm === "") {
+			return "";
+		} else if (anime.toLowerCase().includes(searchTerm.toLowerCase())) {
+			return "";
+		} else if (
+			searchTerm.replace(/[a-z ]/, "") === searchTerm &&
+			anime.replace(/[a-z ]/g, "").includes(searchTerm.replace(/[a-z ]/g, ""))
+		) {
+			// Remove all lowercase letters and then compare
+			return "";
+		} else {
+			return "Hidden";
 		}
 	};
 

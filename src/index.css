@@ -5,7 +5,7 @@
 @layer components {
 	/* TAIL-WIND Class CSS here */
 	.ListItem {
-		@apply font-sans text-xl min-w-max
+		@apply font-sans text-xl min-w-max max-h-10 min-h-0 h-10
 		flex flex-row justify-start origin-bottom-left items-center
 		transition duration-100 ease-linear 
 		hover:scale-110;
@@ -100,5 +100,9 @@
 
 	.Search:focus + .SearchSubmit {
 		@apply outline-none rounded-r-2xl;
+	}
+
+	.Hidden {
+		@apply opacity-10;
 	}
 }
