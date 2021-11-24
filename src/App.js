@@ -134,9 +134,11 @@ class App extends Component {
 	};
 
 	IsNoResults = () => {
+		if (this.state.search === "") {
+			return "";
+		}
 		let AnimeNames = Object.keys(this.state.anime_data);
 		let Results = AnimeNames.filter((anime) => !this.IsSearched(anime));
-		SendNotification("No Results Found", "error");
 		return Results.length === 0 ? " NoResults" : "";
 	};
 
