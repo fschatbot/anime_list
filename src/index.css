@@ -79,7 +79,8 @@
 	}
 
 	sub {
-		@apply text-gray-400 text-2xl;
+		@apply bg-blue-500 text-white text-2xl px-4 rounded-2xl
+		transition-all duration-500 ease-linear;
 	}
 
 	body {
