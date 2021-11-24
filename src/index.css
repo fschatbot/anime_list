@@ -67,15 +67,15 @@
 	}
 
 	.AddAnimes input {
-		@apply w-1/2 border border-gray-600 rounded-md origin-left min-w-min p-1 px-3 text-sm
+		@apply w-1/2 border border-gray-600 rounded-md origin-left min-w-min p-1 px-3 text-sm my-2
 		focus:outline-none focus:border-blue-600 focus:shadow-lg
 		transition duration-200 ease-linear;
 		height: 3rem;
 	}
 	.AddAnimes button {
-		@apply p-2 border border-blue-700 text-blue-700 rounded-md shadow-lg mt-3 w-1/2 text-xl
-		transition duration-200 ease-linear
-		hover:text-white hover:bg-blue-700;
+		@apply p-2 border text-white rounded-3xl shadow-lg mt-3 w-1/2 text-xl bg-blue-500
+		transition-all duration-200 ease-linear
+		hover:bg-blue-700 hover:rounded-xl;
 	}
 
 	sub {
@@ -85,15 +85,16 @@
 	body {
 		@apply m-2 p-0 overflow-x-hidden;
 	}
+	/* For Search bar */
 	.SearchContainer {
 		@apply flex flex-row justify-center;
 	}
-	.Search {
+	.SearchBar {
 		@apply rounded-l-3xl p-2 px-4 border w-11/12 my-3 border-r-0
-		focus:rounded-l-2xl
+		focus:rounded-l-xl
 		transition-all duration-200 ease-linear;
 	}
-	.Search:focus {
+	.SearchBar:focus {
 		outline: none;
 	}
 	.SearchSubmit {
@@ -101,12 +102,14 @@
 		transition-all duration-200 ease-linear;
 	}
 
-	.Search:focus + .SearchSubmit {
-		@apply rounded-r-2xl;
+	.SearchBar:focus + .SearchSubmit {
+		@apply rounded-r-xl;
 		outline: none;
 	}
 
 	.Hidden {
 		@apply opacity-25 scale-95;
 	}
+
+	/* If there are no search results */
 }
