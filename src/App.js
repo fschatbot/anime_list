@@ -63,10 +63,9 @@ class App extends Component {
 					</button>
 				</div>
 				<ul className="AnimeList">
-					{Object.keys(anime_data).map((anime, index) => (
+					{Object.keys(anime_data).map((anime) => (
 						<li
 							key={anime}
-							style={{ transitionDelay: `${index * 25}ms` }}
 							className={
 								"ListItem group " +
 								(anime_data[anime].finished ? "finished " : "") +
