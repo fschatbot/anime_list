@@ -116,7 +116,7 @@
 	}
 
 	/* If there are no search results */
-	.SearchContainer span {
+	.SearchContainer .Error {
 		@apply text-red-500 my-0 opacity-0 origin-top-right hidden
 		transition-all duration-200 ease-linear;
 	}
@@ -127,7 +127,7 @@
 	.NoResults div .SearchSubmit {
 		@apply border-red-500;
 	}
-	.NoResults span {
+	.NoResults .Error {
 		@apply opacity-100;
 		display: block;
 	}
