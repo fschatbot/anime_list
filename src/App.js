@@ -47,7 +47,7 @@ class App extends Component {
 		return (
 			<div className="container">
 				<h1 className="text-4xl">
-					List Of Anime <sub>{Object.keys(anime_data).length}</sub>
+					List Of Anime <sub className="Counter">{Object.keys(anime_data).length}</sub>
 				</h1>
 				<this.SearchContainer />
 				<ul className="AnimeList">
