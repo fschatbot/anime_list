@@ -49,24 +49,8 @@ class App extends Component {
 				<h1 className="text-4xl">
 					List Of Anime <sub>({Object.keys(anime_data).length})</sub>
 				</h1>
-				<div className={"SearchContainer" + this.IsNoResults()}>
-					<div className="SearchBox">
-						<input
-							placeholder="Search..."
-							className="SearchBar group"
-							id="SearchBar"
-							onKeyUp={(e) => this.setState({ search: e.target.value })}
-						/>
-						<button
-							className="SearchSubmit"
-							onClick={(e) =>
-								this.setState({ search: document.getElementById("SearchBar").value })
-							}>
-							<VscSearch size="20" />
-						</button>
-					</div>
-					<span className="Error">Sorry There Are No Results</span>
-				</div>
+				<this.SearchContainer />
+
 				<ul className="AnimeList">
 					{Object.keys(anime_data).map((anime) => (
 						<li
@@ -118,6 +102,27 @@ class App extends Component {
 		} else {
 			return <label>{anime}</label>;
 		}
+	};
+
+	SearchContainer = () => {
+		return (
+			<div className={"SearchContainer" + this.IsNoResults()}>
+				<div className="SearchBox">
+					<input
+						placeholder="Search..."
+						className="SearchBar group"
+						id="SearchBar"
+						onKeyUp={(e) => this.setState({ search: e.target.value })}
+					/>
+					<button
+						className="SearchSubmit"
+						onClick={(e) => this.setState({ search: document.getElementById("SearchBar").value })}>
+						<VscSearch size="20" />
+					</button>
+				</div>
+				<span className="Error">Sorry There Are No Results</span>
+			</div>
+		);
 	};
 
 	IsSearched = (anime) => {
