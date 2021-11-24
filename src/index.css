@@ -90,19 +90,23 @@
 	}
 	.Search {
 		@apply rounded-l-3xl p-2 px-4 border w-11/12 my-3 border-r-0
-		focus:outline-none focus:rounded-l-2xl
-		transition duration-200 ease-linear;
+		focus:rounded-l-2xl
+		transition-all duration-200 ease-linear;
+	}
+	.Search:focus {
+		outline: none;
 	}
 	.SearchSubmit {
 		@apply rounded-r-3xl p-2 px-4 border my-3 border-l-0
-		transition duration-200 ease-linear;
+		transition-all duration-200 ease-linear;
 	}
 
 	.Search:focus + .SearchSubmit {
-		@apply outline-none rounded-r-2xl;
+		@apply rounded-r-2xl;
+		outline: none;
 	}
 
 	.Hidden {
-		@apply opacity-10;
+		@apply opacity-25 scale-95;
 	}
 }
