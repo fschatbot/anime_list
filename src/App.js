@@ -50,7 +50,6 @@ class App extends Component {
 					List Of Anime <sub>({Object.keys(anime_data).length})</sub>
 				</h1>
 				<this.SearchContainer />
-
 				<ul className="AnimeList">
 					{Object.keys(anime_data).map((anime) => (
 						<li
