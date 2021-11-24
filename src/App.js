@@ -49,10 +49,10 @@ class App extends Component {
 				<h1 className="text-4xl">
 					List Of Anime <sub>({Object.keys(anime_data).length})</sub>
 				</h1>
-				<div className="SearchContainer">
+				<div className={"SearchContainer" + this.IsNoResults()}>
 					<input
 						placeholder="Search..."
-						className="Search group"
+						className="SearchBar group"
 						id="SearchBar"
 						onKeyUp={(e) => this.setState({ search: e.target.value })}
 					/>
@@ -61,6 +61,7 @@ class App extends Component {
 						onClick={(e) => this.setState({ search: document.getElementById("SearchBar").value })}>
 						<VscSearch size="20" />
 					</button>
+					<span className="Error">Sorry There Are No Results</span>
 				</div>
 				<ul className="AnimeList">
 					{Object.keys(anime_data).map((anime) => (
@@ -130,6 +131,13 @@ class App extends Component {
 		} else {
 			return "Hidden";
 		}
+	};
+
+	IsNoResults = () => {
+		let AnimeNames = Object.keys(this.state.anime_data);
+		let Results = AnimeNames.filter((anime) => !this.IsSearched(anime));
+		SendNotification("No Results Found", "error");
+		return Results.length === 0 ? " NoResults" : "";
 	};
 
 	DelAnime = (anime) => {
