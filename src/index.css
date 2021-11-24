@@ -86,11 +86,11 @@
 		@apply m-2 p-0 overflow-x-hidden;
 	}
 	/* For Search bar */
-	.SearchContainer {
-		@apply flex flex-row justify-center;
+	.SearchBox {
+		@apply flex flex-row mb-0 w-1/2;
 	}
 	.SearchBar {
-		@apply rounded-l-3xl p-2 px-4 border w-11/12 my-3 border-r-0
+		@apply rounded-l-3xl p-2 px-4 border w-full border-r-0
 		focus:rounded-l-xl
 		transition-all duration-200 ease-linear;
 	}
@@ -98,7 +98,7 @@
 		outline: none;
 	}
 	.SearchSubmit {
-		@apply rounded-r-3xl p-2 px-4 border my-3 border-l-0
+		@apply rounded-r-3xl p-2 px-4 border border-l-0
 		transition-all duration-200 ease-linear;
 	}
 
@@ -111,5 +111,24 @@
 		@apply opacity-25 scale-95;
 	}
 
+	.SearchContainer {
+		@apply my-3;
+	}
+
 	/* If there are no search results */
+	.SearchContainer span {
+		@apply text-red-500 my-0 opacity-0 origin-top-right hidden
+		transition-all duration-200 ease-linear;
+	}
+
+	.NoResults div .SearchBar {
+		@apply border-red-500;
+	}
+	.NoResults div .SearchSubmit {
+		@apply border-red-500;
+	}
+	.NoResults span {
+		@apply opacity-100;
+		display: block;
+	}
 }

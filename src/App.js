@@ -50,17 +50,21 @@ class App extends Component {
 					List Of Anime <sub>({Object.keys(anime_data).length})</sub>
 				</h1>
 				<div className={"SearchContainer" + this.IsNoResults()}>
-					<input
-						placeholder="Search..."
-						className="SearchBar group"
-						id="SearchBar"
-						onKeyUp={(e) => this.setState({ search: e.target.value })}
-					/>
-					<button
-						className="SearchSubmit"
-						onClick={(e) => this.setState({ search: document.getElementById("SearchBar").value })}>
-						<VscSearch size="20" />
-					</button>
+					<div className="SearchBox">
+						<input
+							placeholder="Search..."
+							className="SearchBar group"
+							id="SearchBar"
+							onKeyUp={(e) => this.setState({ search: e.target.value })}
+						/>
+						<button
+							className="SearchSubmit"
+							onClick={(e) =>
+								this.setState({ search: document.getElementById("SearchBar").value })
+							}>
+							<VscSearch size="20" />
+						</button>
+					</div>
 					<span className="Error">Sorry There Are No Results</span>
 				</div>
 				<ul className="AnimeList">
